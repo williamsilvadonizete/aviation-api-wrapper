@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: aviation-api-wrapper
+  cache:
+    type: caffeine
+  security:
+    user:
+      name: sportygroup
+      password: senha@2026
+
+aviation:
+  api:
+    base-url: https://api.aviationapi.com
+    connect-timeout: 3000
+    read-timeout: 5000
+  cache:
+    name: airports
+    expire-after-write-minutes: 15
+    maximum-size: 500
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when_authorized
+  health:
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      airport:
+        register-health-indicator: true
+  retry:
+    instances:
+      airport:
+        max-attempts: 3
+        wait-duration: 500ms

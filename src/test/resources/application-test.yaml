@@ -1,0 +1,10 @@
+spring:
+  cache:
+    type: none
+
+aviation:
+  api:
+    # Not used in integration tests (AviationProvider is mocked). Kept for context load / other tests.
+    base-url: http://localhost:31999
+    connect-timeout: 500
+    read-timeout: 500
